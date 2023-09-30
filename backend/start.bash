@@ -1,4 +1,6 @@
-#!/bin/bash -ex
+set -e
 
-mix ecto.migrate
-exec mix phx.server
+# Do not run anything that shouldn't have secrets access after this line
+
+[ -f secrets.bash ] && source secrets.bash
+exec lein run
